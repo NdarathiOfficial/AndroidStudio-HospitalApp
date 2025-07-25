@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -84,6 +85,7 @@ fun loginScreen(navController: NavController){
             onValueChange = {email=it},
             label = { Text("Enter  email")},
             placeholder = { Text("Please enter email")},
+            textStyle = TextStyle(color = Color.Blue),
             leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email icon")},
             modifier = Modifier.fillMaxWidth(0.8f),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),)
@@ -92,6 +94,7 @@ fun loginScreen(navController: NavController){
             onValueChange = {password=it},
             label = { Text("Please enter your password")},
             placeholder = { Text("Enter password")},
+            textStyle = TextStyle(color = Color.Blue),
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Lock icon")},
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(0.8f),

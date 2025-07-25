@@ -21,6 +21,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -33,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -54,6 +57,7 @@ fun registerScreen(navController: NavController){
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmpassword by remember { mutableStateOf("") }
+    var fullname by remember { mutableStateOf("") }
     var authViewModel: AuthViewModel = viewModel()
     Box (){
         Image(painter = painterResource(id = R.drawable.pexels),
@@ -83,14 +87,25 @@ fun registerScreen(navController: NavController){
             value = username,
             onValueChange = {username=it},
             label = { Text("Enter Username")},
+            textStyle = TextStyle(color = Color.Blue),
             placeholder = { Text("Please enter username")},
             leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon") },
             modifier = Modifier.fillMaxWidth(0.8f))
+       OutlinedTextField(
+           value = fullname,
+           onValueChange = {fullname=it},
+           label = { Text("Enter Full Names") },
+           textStyle = TextStyle(color = Color.Blue),
+           placeholder = { Text("Please enter your full names")},
+           leadingIcon = { Icon(Icons.Default.Person, contentDescription = "Person icon")},
+           modifier = Modifier.fillMaxWidth(0.8f)
+       )
         OutlinedTextField(
             value = email,
             onValueChange = {email=it},
             label = { Text("Enter  email")},
             placeholder = { Text("Please enter email")},
+            textStyle = TextStyle(color = Color.Blue),
             leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email icon")},
             modifier = Modifier.fillMaxWidth(0.8f),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),)
@@ -99,6 +114,7 @@ fun registerScreen(navController: NavController){
             onValueChange = {password=it},
             label = { Text("Please enter your password")},
             placeholder = { Text("Enter password")},
+            textStyle = TextStyle(color = Color.Blue),
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Lock icon")},
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(0.8f),
@@ -109,6 +125,7 @@ fun registerScreen(navController: NavController){
             onValueChange = {confirmpassword=it},
             label = { Text("Please confirm password")},
             placeholder = { Text("Confirm password")},
+            textStyle = TextStyle(color = Color.Blue),
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Lock icon")},
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(0.8f),
@@ -117,7 +134,7 @@ fun registerScreen(navController: NavController){
             Spacer(modifier = Modifier.height(10.dp))
         val context = LocalContext.current
         Button(onClick = {
-            authViewModel.signup(username = username, email = email, password = password, confirmpassword = confirmpassword, navController = navController, context = context )
+            authViewModel.signup(username = username, email = email, password = password, confirmpassword = confirmpassword, fullname = fullname, navController = navController, context = context )
         },
             colors = ButtonDefaults.buttonColors(Color.Black),
             modifier = Modifier.fillMaxWidth(0.8f))

@@ -12,8 +12,8 @@ import com.google.firebase.database.FirebaseDatabase
 
 class AuthViewModel:ViewModel() {
     private val auth: FirebaseAuth= FirebaseAuth.getInstance()
-    fun signup(username:String,email:String,password:String,confirmpassword:String,navController:NavController,context:Context){
-        if (username.isBlank() || email.isBlank() || password.isBlank() || confirmpassword.isBlank()){
+    fun signup(username:String, fullname:String, email:String, password:String, confirmpassword:String, navController:NavController,context:Context){
+        if (username.isBlank() || fullname.isBlank() || email.isBlank() || password.isBlank() || confirmpassword.isBlank()){
             Toast.makeText(context,"Please fill in all the fields!!!", Toast.LENGTH_LONG).show()
             return
         }
@@ -25,7 +25,7 @@ class AuthViewModel:ViewModel() {
             task ->
             if (task.isSuccessful){
                 val userId = auth.currentUser?.uid ?: ""
-                val user = UserModel(username=username,email=email,userId=userId)
+                val user = UserModel(username=username,email=email,userId=userId, fullname=fullname)
 
                 saveUserToDatabase(user,navController,context)
             }else{
